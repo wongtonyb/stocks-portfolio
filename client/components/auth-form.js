@@ -7,29 +7,25 @@ import {auth} from '../store'
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+  const {method, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
+    <div id="auth-form">
+      <form onSubmit={handleSubmit} name={method}>
+        {displayName === 'Log In' ? (
+          <h1>Welcome Back</h1>
+        ) : (
+          <React.Fragment>
+            <h1>Register Below</h1>
+            <input name="username" type="text" placeholder="name" />
+          </React.Fragment>
+        )}
+        <input name="email" type="email" placeholder="email" />
+        <input name="password" type="password" placeholder="password" />
+        <button type="submit">{displayName}</button>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      {/* <a href="/auth/google">{displayName} with Google</a> */}
     </div>
   )
 }
@@ -43,15 +39,15 @@ const AuthForm = props => {
  */
 const mapLogin = state => {
   return {
-    name: 'login',
-    displayName: 'Login',
+    method: 'login',
+    displayName: 'Log In',
     error: state.user.error
   }
 }
 
 const mapSignup = state => {
   return {
-    name: 'signup',
+    method: 'signup',
     displayName: 'Sign Up',
     error: state.user.error
   }
@@ -64,7 +60,8 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const username = formName === 'signup' ? evt.target.username.value : null
+      dispatch(auth(email, password, formName, username))
     }
   }
 }
@@ -76,7 +73,7 @@ export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
  * PROP TYPES
  */
 AuthForm.propTypes = {
-  name: PropTypes.string.isRequired,
+  method: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object

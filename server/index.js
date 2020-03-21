@@ -57,7 +57,8 @@ const createApp = () => {
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
       store: sessionStore,
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: false,
+      maxAge: 5000
     })
   )
   app.use(passport.initialize())
@@ -106,6 +107,8 @@ const startListening = () => {
 }
 
 const syncDb = () => db.sync()
+// const syncDb = () => db.sync({ alter: true })
+// const syncDb = () => db.sync({force: true})
 
 async function bootApp() {
   await sessionStore.sync()

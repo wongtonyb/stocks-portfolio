@@ -21,15 +21,18 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    const user = await User.create(req.body)
+    const user = await User.create({...req.body, cash: 5000})
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
-    if (err.name === 'SequelizeUniqueConstraintError') {
+    if (err.name === 'SequelizeValidationError') {
+      res.status(401).send('Check all fields are correctly filled in')
+    } else if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists')
     } else {
       next(err)
     }
   }
+  console.log(res.data)
 })
 
 router.post('/logout', (req, res) => {
