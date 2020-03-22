@@ -271,9 +271,8 @@ input:focus {
   margin-right: 15%;
   border: none;
   background-color: black;
-  height: 250px;
+  height: 295px;
   color: white;
-  height: 100%;
 }
 
 #buystock > h1 {
@@ -301,6 +300,12 @@ input:focus {
   width: 90px;
 }
 
+#buystock #line input::-webkit-outer-spin-button,
+#buystock #line input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 #buystock button {
   font-size: 28px;
   width: 80px;
@@ -315,4 +320,10 @@ input:focus {
 
 #buystock button:hover {
   opacity: 0.6;
+}
+
+#buystock #error {
+  position: relative;
+  bottom: 60px;
+  left: 400px;
 }

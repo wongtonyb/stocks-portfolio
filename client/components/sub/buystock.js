@@ -5,7 +5,7 @@ import {buyStock} from '../../store'
 export class BuyStock extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {shares: 0}
+    this.state = {shares: ''}
     this.handleChange = this.handleChange.bind(this)
   }
   handleChange(e) {
@@ -15,8 +15,9 @@ export class BuyStock extends React.Component {
   }
 
   render() {
-    console.log(this.props)
-    const {symbol, cash, handleChange, current, handleSubmit} = this.props
+    const {symbol, cash, current, handleSubmit} = this.props
+
+    let total = (current * this.state.shares).toFixed(2)
 
     return (
       <form id="buystock">
@@ -26,9 +27,11 @@ export class BuyStock extends React.Component {
           <h2>Number of Shares</h2>
           <input
             name="shares"
-            type="number"
+            type="text"
             placeholder="0"
-            onChange={handleChange}
+            max="9999"
+            value={this.state.shares}
+            onChange={this.handleChange}
           />
         </div>
         <div id="line">
@@ -37,11 +40,18 @@ export class BuyStock extends React.Component {
         </div>
         <div id="line">
           <h2>Estimated Cost</h2>
-          <h3>${current * this.state.shares}</h3>
+          <h3>
+            {isNaN(total)
+              ? 'Enter a numeric value'
+              : this.state.shares.includes('.')
+              ? 'Enter a whole quantity'
+              : total}
+          </h3>
         </div>
         <button type="submit" onClick={handleSubmit}>
           BUY
         </button>
+        <div id="error">Error Message</div>
       </form>
     )
   }
