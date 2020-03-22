@@ -26,11 +26,14 @@ export const UserHome = props => {
   } = props
 
   return (
-    <div>
-      <h1>Welcome {name.charAt(0).toUpperCase() + name.slice(1)},</h1>
-      <h2>Search A Stock</h2>
+    <div id="user-home">
+      {/* <h2>SEARCH STOCKS</h2> */}
       <form onSubmit={handleSubmit}>
-        <input name="symbol" type="text" placeholder="i.e. AAPL" />
+        <input
+          name="symbol"
+          type="text"
+          placeholder="Search stocks by ticket symbol i.e. AAPL"
+        />
         <button type="submit">Search</button>
       </form>
       {symbol && (

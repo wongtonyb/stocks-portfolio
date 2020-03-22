@@ -36,11 +36,17 @@ form div {
   display: inline-block;
 }
 
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
 /* home */
 #home {
   display: flex;
   justify-content: space-between;
   padding: 2%;
+  background-color: black;
 }
 
 #home h1 {
@@ -99,4 +105,214 @@ form div {
 #auth-form button:hover {
   color: gray;
   background-color: palegreen;
+}
+
+/* user-home */
+#user-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  letter-spacing: 1px;
+}
+
+#user-home > h2 {
+  position: relative;
+  right: 135px;
+  font-size: 36px;
+  color: white;
+  margin: 20px;
+}
+
+#user-home > form {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+#user-home > form input {
+  font-size: 20px;
+  padding: 10px;
+  color: palegreen;
+  border-radius: 10px;
+  border: none;
+  background-color: gray;
+  font-style: italic;
+  letter-spacing: 1px;
+  width: 600px;
+}
+
+#user-home > form input::placeholder {
+  font-style: italic;
+  color: gainsboro;
+  letter-spacing: 1px;
+}
+
+#user-home > form button {
+  font-size: 20px;
+  letter-spacing: 1px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin-left: 10px;
+  background-color: #585858;
+  color: #8c8b8b;
+  cursor: pointer;
+}
+
+#user-home > form button:hover {
+  opacity: 0.5;
+}
+
+#buy-info {
+  width: 100%;
+}
+
+/* stockheader */
+#stock-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 15%;
+  margin-right: 15%;
+  border: none;
+  background-color: #52ad52;
+}
+
+#stock-header div {
+  display: flex;
+  width: 100%;
+  align-content: center;
+}
+
+#stock-header #one h1 {
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+#stock-header #two {
+  justify-content: space-between;
+}
+#stock-header #two h1 {
+  margin: 10px;
+  font-size: 38px;
+}
+#stock-header #two h2 {
+  margin: 10px;
+  font-size: 32px;
+}
+
+/* StatsInfo */
+#stats-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%;
+  margin-right: 15%;
+  border: none;
+  background-color: black;
+  height: 250px;
+  color: white;
+}
+
+#stats-info > h1 {
+  margin: 20px;
+  margin-bottom: 0px;
+}
+
+#stats-info #main {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  background-color: black;
+}
+
+#stats-info #left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#stats-info #right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+  padding: 10px;
+}
+
+.stat h3 {
+  font-weight: 400;
+  color: gray;
+}
+
+.stat h4 {
+  font-weight: 300;
+  color: white;
+}
+
+/* BuyStocks */
+#buystock {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%;
+  margin-right: 15%;
+  border: none;
+  background-color: black;
+  height: 250px;
+  color: white;
+  height: 100%;
+}
+
+#buystock > h1 {
+  margin: 15px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+#buystock > h5 {
+  margin: 15px;
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+#buystock #line {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0px;
+  margin-bottom: 25px;
+  margin-left: 25px;
+}
+
+#buystock #line input {
+  text-align: right;
+  font-size: 20px;
+  width: 90px;
+}
+
+#buystock button {
+  font-size: 28px;
+  width: 80px;
+  background-color: palegreen;
+  border-radius: 10px;
+  border: none;
+  margin: 5px;
+  position: relative;
+  left: 585px;
+  bottom: 12px;
+}
+
+#buystock button:hover {
+  opacity: 0.6;
 }

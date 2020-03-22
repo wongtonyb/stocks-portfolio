@@ -21,10 +21,15 @@ export class BuyStock extends React.Component {
     return (
       <form id="buystock">
         <h1>Buy {symbol}</h1>
-        <h6>{cash} Available</h6>
+        <h5>${cash} Available</h5>
         <div id="line">
           <h2>Number of Shares</h2>
-          <input name="shares" type="text" onChange={handleChange} />
+          <input
+            name="shares"
+            type="number"
+            placeholder="0"
+            onChange={handleChange}
+          />
         </div>
         <div id="line">
           <h2>Market Price</h2>

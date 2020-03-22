@@ -1,6 +1,19 @@
 import React from 'react'
 
 export const StatsInfo = props => {
+  function letterValue(labelValue) {
+    // Nine Zeroes for Trillion
+    return Math.abs(Number(labelValue)) >= 1.0e12
+      ? (Math.abs(Number(labelValue)) / 1.0e12).toFixed(2) + 'T'
+      : // Six Zeroes for Billions
+      Math.abs(Number(labelValue)) >= 1.0e9
+      ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(2) + 'B'
+      : // Three Zeroes for Million
+      Math.abs(Number(labelValue)) >= 1.0e6
+      ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(2) + 'M'
+      : Math.abs(Number(labelValue))
+  }
+
   return (
     <div id="stats-info">
       <h1>Stats</h1>
@@ -22,15 +35,15 @@ export const StatsInfo = props => {
         <div id="right">
           <div className="stat">
             <h3>VOLUME</h3>
-            <h2>{props.volume}</h2>
+            <h2>{letterValue(props.volume)}</h2>
           </div>
           <div className="stat">
             <h3>AVG VOL</h3>
-            <h2>{props.avgVol}</h2>
+            <h2>{letterValue(props.avgVol)}</h2>
           </div>
           <div className="stat">
             <h3>MARKET CAP</h3>
-            <h2>{props.marketCap}</h2>
+            <h2>{letterValue(props.marketCap)}</h2>
           </div>
         </div>
       </div>
