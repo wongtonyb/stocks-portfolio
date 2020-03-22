@@ -2,21 +2,56 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {getStock} from '../store'
+import {StockHeader} from './sub/stockheader'
+import {BuyStock} from './sub/buystock'
+import {StatsInfo} from './sub/statsinfo'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {handleSubmit, name, symbol} = props
+  const {
+    handleSubmit,
+    name,
+    cash,
+    symbol,
+    companyName,
+    open,
+    current,
+    high,
+    low,
+    volume,
+    avgVol,
+    marketCap
+  } = props
 
   return (
     <div>
-      <h3>Welcome, {name.charAt(0).toUpperCase() + name.slice(1)}</h3>
+      <h1>Welcome {name.charAt(0).toUpperCase() + name.slice(1)},</h1>
+      <h2>Search A Stock</h2>
       <form onSubmit={handleSubmit}>
-        <input name="symbol" type="text" placeholder="i.e. AAPPL" />
+        <input name="symbol" type="text" placeholder="i.e. AAPL" />
         <button type="submit">Search</button>
       </form>
-      <div>{symbol}</div>
+      {symbol && (
+        <div id="buy-info">
+          <StockHeader
+            symbol={symbol}
+            companyName={companyName}
+            current={current}
+            open={open}
+          />
+          <StatsInfo
+            open={open}
+            high={high}
+            low={low}
+            volume={volume}
+            avgVol={avgVol}
+            marketCap={marketCap}
+          />
+          <BuyStock symbol={symbol} cash={cash} current={current} />
+        </div>
+      )}
     </div>
   )
 }
@@ -27,7 +62,19 @@ export const UserHome = props => {
 const mapState = state => {
   return {
     name: state.user.name,
-    symbol: state.stocks.symbol
+    cash: state.user.cash,
+    symbol: state.buy.symbol,
+    companyName: state.buy.companyName,
+    open: state.buy.open,
+    current:
+      state.buy.calculationPrice === 'close'
+        ? state.buy.close
+        : state.buy.calculationPrice,
+    high: state.buy.high,
+    low: state.buy.low,
+    volume: state.buy.volume,
+    avgVol: state.buy.avgTotalVolume,
+    marketCap: state.buy.marketCap
   }
 }
 
