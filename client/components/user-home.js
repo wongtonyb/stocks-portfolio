@@ -22,7 +22,8 @@ export const UserHome = props => {
     low,
     volume,
     avgVol,
-    marketCap
+    marketCap,
+    error
   } = props
 
   return (
@@ -32,10 +33,15 @@ export const UserHome = props => {
         <input
           name="symbol"
           type="text"
-          placeholder="Search stocks by ticket symbol i.e. AAPL"
+          placeholder="Search stocks by ticker symbol i.e. AAPL"
         />
         <button type="submit">Search</button>
       </form>
+      {error && (
+        <div className="error">
+          Stock not found, please enter a valid ticker symbol
+        </div>
+      )}
       {symbol && (
         <div id="buy-info">
           <StockHeader
@@ -52,7 +58,12 @@ export const UserHome = props => {
             avgVol={avgVol}
             marketCap={marketCap}
           />
-          <BuyStock symbol={symbol} cash={cash} current={current} />
+          <BuyStock
+            symbol={symbol}
+            companyName={companyName}
+            cash={cash}
+            current={current}
+          />
         </div>
       )}
     </div>
@@ -77,7 +88,8 @@ const mapState = state => {
     low: state.buy.low,
     volume: state.buy.volume,
     avgVol: state.buy.avgTotalVolume,
-    marketCap: state.buy.marketCap
+    marketCap: state.buy.marketCap,
+    error: state.buy.error
   }
 }
 

@@ -41,6 +41,14 @@ input:focus {
   outline: none;
 }
 
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
 /* home */
 #home {
   display: flex;
@@ -271,7 +279,7 @@ input:focus {
   margin-right: 15%;
   border: none;
   background-color: black;
-  height: 295px;
+  height: 285px;
   color: white;
 }
 
@@ -294,6 +302,14 @@ input:focus {
   margin-left: 25px;
 }
 
+#buystock #last-line {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0px;
+  margin-left: 25px;
+  margin-bottom: 0px;
+}
+
 #buystock #line input {
   text-align: right;
   font-size: 20px;
@@ -305,7 +321,7 @@ input:focus {
   -webkit-appearance: none;
   margin: 0;
 }
-
+/*
 #buystock button {
   font-size: 28px;
   width: 80px;
@@ -314,16 +330,40 @@ input:focus {
   border: none;
   margin: 5px;
   position: relative;
-  left: 585px;
-  bottom: 12px;
+  left: 910px;
+  bottom: 30px;
+  cursor: pointer;
 }
 
 #buystock button:hover {
   opacity: 0.6;
 }
 
-#buystock #error {
+#buystock #buy-notice {
   position: relative;
-  bottom: 60px;
-  left: 400px;
+  bottom: 73px;
+  left: 695px;
+  width: 190px;
+  margin-right: 0px;
+} */
+
+#buystock #btn-line {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0px;
+  margin-right: 10px;
+}
+
+#buystock button {
+  font-size: 28px;
+  width: 80px;
+  background-color: palegreen;
+  border-radius: 10px;
+  border: none;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#buystock button:hover {
+  opacity: 0.6;
 }

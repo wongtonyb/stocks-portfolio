@@ -6,7 +6,7 @@ const Transaction = db.define('transaction', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  name: {
+  companyName: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -20,6 +20,10 @@ const Transaction = db.define('transaction', {
   },
   qty: {
     type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  total: {
+    type: Sequelize.DECIMAL(10, 2),
     allowNull: false
   },
   date: {

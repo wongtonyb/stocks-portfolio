@@ -21,9 +21,11 @@ export const getStock = symbol => async dispatch => {
     const res = await axios.get(
       `https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${iexTestToken}`
     )
+    res.error = false
     dispatch(gotStock(res.data))
   } catch (err) {
     console.error(err)
+    return dispatch(gotStock({error: err}))
   }
 }
 
@@ -37,7 +39,7 @@ export const buyStock = stock => async dispatch => {
 }
 
 //initial state
-const initialState = {symbol: false}
+const initialState = {error: false}
 
 //reducer
 export default function(state = initialState, action) {
