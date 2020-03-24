@@ -91,6 +91,11 @@ export class BuyStock extends React.Component {
             max="9999"
             value={this.state.shares}
             onChange={this.handleChange}
+            onKeyPress={event => {
+              if (event.which === 13 /* Enter */) {
+                event.preventDefault()
+              }
+            }}
           />
         </div>
         <div id="line">

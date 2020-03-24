@@ -45,6 +45,7 @@ export const Sell = props => {
         cash={user.cash}
         current={current}
         userId={user.id}
+        shares={ustock.qty}
       />
     </div>
   )

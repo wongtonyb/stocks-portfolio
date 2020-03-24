@@ -1,15 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {buyStock} from '../../store'
+import {sellStock} from '../../store'
 
 export class SellStock extends React.Component {
   constructor(props) {
     super(props)
     this.state = {shares: '', total: 0, error: false}
     this.handleChange = this.handleChange.bind(this)
+    this.handleSell = this.handleSell.bind(this)
   }
 
   handleChange(e) {
+    e.preventDefault()
     let sum = (this.props.current * e.target.value).toFixed(2)
     this.setState({
       shares: e.target.value,
@@ -17,7 +19,54 @@ export class SellStock extends React.Component {
     })
   }
 
-  handleSell(e) {}
+  handleSell(e) {
+    e.preventDefault()
+    var today = new Date()
+    var date =
+      today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+    var time =
+      today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+    var dateTime = date + ' ' + time
+    //stock for transaction
+    let tstock = {
+      symbol: this.props.symbol,
+      companyName: this.props.companyName,
+      type: 'sell',
+      price: this.props.current,
+      qty: Number(this.state.shares),
+      total: Number(this.state.total),
+      date: dateTime,
+      userId: this.props.userId
+    }
+    //stock for portfolio
+    let ustock = {
+      symbol: this.props.symbol,
+      companyName: this.props.companyName,
+      userId: this.props.userId
+    }
+    //update user cash
+    // error handling
+    if (tstock.qty > Number(this.props.shares)) {
+      this.setState({
+        error: 'Not Enough Shares'
+      })
+    } else if (
+      tstock.qty < 1 ||
+      isNaN(tstock.qty) ||
+      this.state.shares.includes('.')
+    ) {
+      this.setState({
+        error: 'Invalid Quantity'
+      })
+    } else {
+      this.props.sellStock(tstock)
+      // buyStock(tstock)
+      console.log(this.props.error)
+      this.setState({
+        error: 'Transaction Completed'
+      })
+    }
+  }
 
   render() {
     const {symbol, cash, current} = this.props
@@ -26,9 +75,14 @@ export class SellStock extends React.Component {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
 
+    const svalue = (this.props.shares * this.props.current).toFixed(2)
+
     return (
       <form id="sellstock">
         <h1>Sell {symbol}</h1>
+        <h5>
+          {this.props.shares} Shares - ${numberWithCommas(svalue)}
+        </h5>
         <div id="line">
           <h2>Number of Shares</h2>
           <input
@@ -38,6 +92,11 @@ export class SellStock extends React.Component {
             max="9999"
             value={this.state.shares}
             onChange={this.handleChange}
+            onKeyPress={event => {
+              if (event.which === 13 /* Enter */) {
+                event.preventDefault()
+              }
+            }}
           />
         </div>
         <div id="line">
@@ -55,7 +114,7 @@ export class SellStock extends React.Component {
           </h3>
         </div>
         <div id="btn-line">
-          {this.state.error === 'Insufficient Balance' ||
+          {this.state.error === 'Not Enough Shares' ||
           this.state.error === 'Invalid Quantity' ? (
             <div id="buy-notice" className="error">
               {this.state.error}
@@ -89,7 +148,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    buyStock: stock => dispatch(buyStock(stock))
+    sellStock: stock => dispatch(sellStock(stock))
   }
 }
 
