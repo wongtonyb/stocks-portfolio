@@ -5,12 +5,9 @@ import {getTrans} from '../store/transaction.js'
 export class Transaction extends React.Component {
   componentDidMount() {
     this.props.getTrans(this.props.userId)
-    console.log(this.props.trans)
   }
 
   render() {
-    console.log(this.props.trans)
-
     return (
       <div id="transaction">
         <h1>{this.props.userName}'s Transaction</h1>

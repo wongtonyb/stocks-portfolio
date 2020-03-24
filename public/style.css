@@ -383,18 +383,16 @@ button:focus {
 }
 
 /* transaction */
-/* #transaction {
-  position: relative;
-} */
+
 #transaction {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 25px;
+  margin-top: 5px;
   margin-left: 60px;
   margin-right: 60px;
   margin-bottom: 10px;
-  background-color: black;
+  /* background-color: black; */
 }
 
 #transaction > h1 {
@@ -402,6 +400,7 @@ button:focus {
   letter-spacing: 1px;
   font-size: 48px;
   margin: 25px;
+  margin-top: 10px;
 }
 
 #transaction #header {
@@ -468,4 +467,182 @@ button:focus {
 
 #transaction .med {
   width: 90px;
+}
+
+/* portfolio */
+#portfolio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-bottom: 10px;
+  /* background-color: black; */
+}
+
+#portfolio > h1 {
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  font-size: 48px;
+  margin: 25px;
+  margin-top: 10px;
+}
+
+#portfolio #main {
+  display: flex;
+  justify-content: center;
+  /* background-color: black; */
+  width: 100%;
+  /* height: 610px; */
+  height: 70vh;
+}
+
+#portfolio #main #left {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  /* background-color: black; */
+  width: 50%;
+  margin-right: 2%;
+}
+
+#portolio button {
+  border: none;
+}
+
+#portfolio #border {
+  border-left: 2px solid gray;
+  height: 95%;
+  align-self: center;
+}
+
+/* stock port header */
+#stock-header-port {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin: 2% 5%;
+  border-radius: 10px;
+}
+
+#stock-header-port #one {
+  display: flex;
+  justify-content: space-between;
+}
+
+#stock-header-port #two {
+  display: flex;
+  justify-content: space-between;
+}
+
+#stock-header-port h1 {
+  margin: 10px;
+  font-size: 28px;
+}
+#stock-header-port h2 {
+  margin: 10px;
+  font-size: 22px;
+}
+
+#stock-header-port:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+/* sell */
+#portfolio #right {
+  display: flex;
+  width: 50%;
+}
+
+#sell-info {
+  width: 100%;
+}
+
+/* sell - stock-header */
+#sell-info #stock-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 5%;
+  border: none;
+}
+
+#sell-info #stats-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-right: 5%;
+  border: none;
+  background-color: black;
+  height: 250px;
+  color: white;
+}
+
+/* sell-sellstock */
+#sellstock {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-right: 5%;
+  border: none;
+  background-color: black;
+  height: 250px;
+  color: white;
+}
+
+#sellstock > h1 {
+  margin-bottom: 15px;
+  margin-left: 20px;
+}
+
+#sellstock #line {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0px;
+  margin-bottom: 25px;
+  margin-left: 25px;
+}
+
+#sellstock #last-line {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0px;
+  margin-left: 25px;
+  margin-bottom: 0px;
+}
+
+#sellstock #line input {
+  text-align: right;
+  font-size: 20px;
+  width: 90px;
+}
+
+#sellstock #line input::-webkit-outer-spin-button,
+#sellstock #line input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#sellstock #btn-line {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0px;
+  margin-right: 10px;
+}
+
+#sellstock button {
+  font-size: 28px;
+  width: 80px;
+  background-color: palegreen;
+  border-radius: 10px;
+  border: none;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#sellstock button:hover {
+  opacity: 0.6;
 }

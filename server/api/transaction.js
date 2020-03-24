@@ -30,7 +30,6 @@ router.get('/:id', async (req, res, next) => {
         qty: {
           [Op.gt]: 0
         }
-        // order: '"date" DESC'
       },
       order: [['date', 'DESC']]
     })

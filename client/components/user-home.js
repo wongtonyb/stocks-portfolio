@@ -20,6 +20,7 @@ export const UserHome = props => {
     companyName,
     open,
     current,
+    change,
     high,
     low,
     volume,
@@ -27,15 +28,6 @@ export const UserHome = props => {
     marketCap,
     error
   } = props
-
-  const floatToPerc = n => {
-    n *= 100
-    n = n.toFixed(2)
-    return n
-  }
-
-  let change = (current - open) / open
-  change = floatToPerc(change)
 
   let color = change > 0 ? 'up' : change < 0 ? 'down' : 'neutral'
 
@@ -64,6 +56,7 @@ export const UserHome = props => {
             current={current}
             open={open}
             color={color}
+            change={change}
           />
           <StatsInfo
             open={open}
@@ -96,14 +89,18 @@ const mapState = state => {
     cash: state.user.cash,
     symbol: state.buy.symbol,
     companyName: state.buy.companyName,
-    open: state.buy.open,
-    current:
-      state.buy.calculationPrice === 'close'
-        ? state.buy.close
-        : state.buy.calculationPrice,
-    high: state.buy.high,
-    low: state.buy.low,
-    volume: state.buy.volume,
+    //market closed - use previousClose
+    open: state.buy.open || state.buy.previousClose,
+    //market closed - use latestPrice
+    current: isNaN(state.buy.calculationPrice)
+      ? state.buy.latestPrice
+      : state.buy.calculationPrice,
+    change: state.buy.change,
+    // market closed - use 'close'
+    high: state.buy.high || 'close',
+    low: state.buy.low || 'close',
+    //market closed - use lastVolume
+    volume: state.buy.volume || state.buy.previousVolume,
     avgVol: state.buy.avgTotalVolume,
     marketCap: state.buy.marketCap,
     error: state.buy.error
