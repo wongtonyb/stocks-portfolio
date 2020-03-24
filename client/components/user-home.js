@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {getStock} from '../store'
 import {StockHeader} from './sub/stockheader'
 import {BuyStock} from './sub/buystock'
+// import {BuyStock} from './buystock'
 import {StatsInfo} from './sub/statsinfo'
 
 /**
@@ -12,6 +13,7 @@ import {StatsInfo} from './sub/statsinfo'
 export const UserHome = props => {
   const {
     handleSubmit,
+    userId,
     name,
     cash,
     symbol,
@@ -26,6 +28,18 @@ export const UserHome = props => {
     error
   } = props
 
+  const floatToPerc = n => {
+    n *= 100
+    n = n.toFixed(2)
+    return n
+  }
+
+  let change = (current - open) / open
+  change = floatToPerc(change)
+
+  let color = change > 0 ? 'up' : change < 0 ? 'down' : 'neutral'
+
+  console.log('user-home', props)
   return (
     <div id="user-home">
       {/* <h2>SEARCH STOCKS</h2> */}
@@ -49,6 +63,7 @@ export const UserHome = props => {
             companyName={companyName}
             current={current}
             open={open}
+            color={color}
           />
           <StatsInfo
             open={open}
@@ -63,6 +78,7 @@ export const UserHome = props => {
             companyName={companyName}
             cash={cash}
             current={current}
+            userId={userId}
           />
         </div>
       )}
@@ -75,6 +91,7 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
+    userId: state.user.id,
     name: state.user.name,
     cash: state.user.cash,
     symbol: state.buy.symbol,
@@ -95,6 +112,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
+    getstock: s => dispatch(getStock(s)),
     handleSubmit(evt) {
       evt.preventDefault()
       dispatch(getStock(evt.target.symbol.value))

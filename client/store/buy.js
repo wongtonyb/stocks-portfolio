@@ -35,8 +35,13 @@ export const buyStock = stock => async dispatch => {
     dispatch(broughtStock(res.data))
   } catch (err) {
     console.error(err)
+    return dispatch(broughtStock({error: err}))
   }
 }
+
+// export const buyStock = stock => dispatch => {
+//   dispatch(broughtStock({error: true}))
+// }
 
 //initial state
 const initialState = {error: false}

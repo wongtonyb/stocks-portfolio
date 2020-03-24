@@ -4,6 +4,8 @@
 
 ### High Priority
 
+Props not getting mapped to buystock component. problem with react-redux???
+
 hide api routes
 
 dynamic states for buy stock components

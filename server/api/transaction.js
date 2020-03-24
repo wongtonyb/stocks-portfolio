@@ -1,8 +1,44 @@
 const router = require('express').Router()
-const {Transaction} = require('../db/models')
+const {Op} = require('Sequelize')
+const {Transaction, User} = require('../db/models')
 module.exports = router
 
 //get transaction
+// all - for testing
+// router.get('/', async (req, res, next) => {
+//   try {
+//     const trans = await Transaction.findAll({
+//       where: {
+//         userId: req.user.id,
+//         qty: {
+//           [Op.gt]: 0
+//         }
+//       }
+//     })
+//     res.json(trans)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
+//by id
+router.get('/:id', async (req, res, next) => {
+  try {
+    const trans = await Transaction.findAll({
+      where: {
+        userId: req.params.id,
+        qty: {
+          [Op.gt]: 0
+        }
+        // order: '"date" DESC'
+      },
+      order: [['date', 'DESC']]
+    })
+    res.json(trans)
+  } catch (err) {
+    next(err)
+  }
+})
 
 //add transaction
 router.post('/', async (req, res, next) => {

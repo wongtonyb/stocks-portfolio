@@ -10,8 +10,9 @@ export const StockHeader = props => {
   let change = (props.current - props.open) / props.open
   change = floatToPerc(change)
 
+  console.log(change)
   return (
-    <div id="stock-header">
+    <div id="stock-header" className={props.color}>
       <div id="one">
         <h1>
           {props.symbol} - {props.companyName}
@@ -19,7 +20,7 @@ export const StockHeader = props => {
       </div>
       <div id="two">
         <h1>${props.current}</h1>
-        <h2>{change < 0 ? `-${Math.abs(change)}%` : `${Math.abs(change)}%`}</h2>
+        <h2>{change}</h2>
       </div>
     </div>
   )

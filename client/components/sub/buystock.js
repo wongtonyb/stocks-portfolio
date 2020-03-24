@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {buyStock} from '../../store'
+import {buyStock, getStock} from '../../store'
 
 export class BuyStock extends React.Component {
   constructor(props) {
@@ -9,15 +9,21 @@ export class BuyStock extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleBuy = this.handleBuy.bind(this)
   }
+
+  componentDidMount() {
+    console.log(this.props)
+  }
+
   handleChange(e) {
     let sum = (this.props.current * e.target.value).toFixed(2)
-    console.log(e.target.value, sum)
     this.setState({
       shares: e.target.value,
       total: sum
     })
   }
+
   handleBuy(e) {
+    e.preventDefault()
     var today = new Date()
     var date =
       today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
@@ -32,25 +38,33 @@ export class BuyStock extends React.Component {
       price: this.props.current,
       qty: Number(this.state.shares),
       total: Number(this.state.total),
-      date: dateTime
-      //fk
+      date: dateTime,
+      userId: this.props.userId
     }
+    console.log(tstock)
     //stock for portfolio
     let ustock = {
       symbol: this.props.symbol,
-      companyName: this.props.companyName
-      //fk
+      companyName: this.props.companyName,
+      userId: this.props.userId
     }
     // balance > total && total is numb !isNaN(n) &&  shares has no .
     if (tstock.total > Number(this.props.cash)) {
       this.setState({
         error: 'Insufficient Balance'
       })
-    } else if (isNaN(tstock.qty) || this.state.shares.includes('.')) {
+    } else if (
+      tstock.qty < 1 ||
+      isNaN(tstock.qty) ||
+      this.state.shares.includes('.')
+    ) {
       this.setState({
         error: 'Invalid Quantity'
       })
     } else {
+      this.props.buyStock(tstock)
+      // buyStock(tstock)
+      console.log(this.props.error)
       this.setState({
         error: 'Transaction Completed'
       })
@@ -99,7 +113,12 @@ export class BuyStock extends React.Component {
             <div id="buy-notice" className="error">
               {this.state.error}
             </div>
-          ) : this.state.error === 'Transaction Completed' ? (
+          ) : // this.props.error ? (
+          //   <div id="buy-notice" className="error">
+          //     Transaction Failed
+          //   </div>
+          // ) :
+          this.state.error === 'Transaction Completed' ? (
             <div id="buy-notice" className="success">
               {this.state.error}
             </div>
@@ -115,10 +134,16 @@ export class BuyStock extends React.Component {
   }
 }
 
+const mapState = state => {
+  return {
+    error: state.buy.error || 'does not exist'
+  }
+}
+
 const mapDispatch = dispatch => {
   return {
     buyStock: stock => dispatch(buyStock(stock))
   }
 }
 
-export default connect(null, mapDispatch)(BuyStock)
+export default connect(mapState, mapDispatch)(BuyStock)

@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Transaction, Ustocks} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -13,6 +13,138 @@ async function seed() {
       email: 'test@email.com',
       password: 'test',
       cash: 5000
+    })
+  ])
+
+  const transaction = await Promise.all([
+    Transaction.create({
+      symbol: 'AAPL',
+      companyName: 'Apple, Inc.',
+      type: 'buy',
+      price: 237.85,
+      qty: 5,
+      total: 1189.25,
+      date: '2020-2-22 23:37:25',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'AAPL',
+      companyName: 'Apple, Inc.',
+      type: 'buy',
+      price: 227.85,
+      qty: 2,
+      total: 455.7,
+      date: '2020-2-23 23:37:25',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'AAPL',
+      companyName: 'Apple, Inc.',
+      type: 'sell',
+      price: 257.85,
+      qty: 3,
+      total: 773.55,
+      date: '2020-2-23 23:39:25',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'TSLA',
+      companyName: 'Tesla, Inc.',
+      type: 'buy',
+      price: 439.05,
+      qty: 3,
+      total: 1317.15,
+      date: '2020-2-24 23:39:25',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'TSLA',
+      companyName: 'Tesla, Inc.',
+      type: 'sell',
+      price: 469.05,
+      qty: 3,
+      total: 1407.15,
+      date: '2020-2-25 23:39:25',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'SNAP',
+      companyName: 'Snap, Inc.',
+      type: 'buy',
+      price: 10.27,
+      qty: 21,
+      total: 215.67,
+      date: '2020-2-26 18:39:25',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'TWTR',
+      companyName: 'Twitter, Inc.',
+      type: 'buy',
+      price: 24.23,
+      qty: 11,
+      total: 266.53,
+      date: '2020-3-12 22:39:25',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'FB',
+      companyName: 'Facebook, Inc.',
+      type: 'buy',
+      price: 155.19,
+      qty: 3,
+      total: 465.57,
+      date: '2020-3-13 23:45:25',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'NFLX',
+      companyName: 'Netflix, Inc.',
+      type: 'buy',
+      price: 337.79,
+      qty: 5,
+      total: 1688.95,
+      date: '2020-3-14 23:39:25',
+      userId: 1
+    })
+  ])
+
+  const ustocks = await Promise.all([
+    Ustocks.create({
+      symbol: 'AAPL',
+      companyName: 'Apple, Inc.',
+      qty: 4,
+      userId: 1
+    }),
+    Ustocks.create({
+      symbol: 'TSLA',
+      companyName: 'Tesla, Inc.',
+      qty: 0,
+      userId: 1
+    }),
+    Ustocks.create({
+      symbol: 'SNAP',
+      companyName: 'Snap, Inc.',
+      qty: 21,
+      userId: 1
+    }),
+    Ustocks.create({
+      symbol: 'TWTR',
+      companyName: 'Twitter, Inc.',
+      qty: 11,
+      userId: 1
+    }),
+    Ustocks.create({
+      symbol: 'FB',
+      companyName: 'Facebook, Inc.',
+      qty: 3,
+      userId: 1
+    }),
+    Ustocks.create({
+      symbol: 'NFLX',
+      companyName: 'Netflix, Inc.',
+      qty: 5,
+      userId: 1
     })
   ])
 

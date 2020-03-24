@@ -1,6 +1,8 @@
 body {
   font-family: sans-serif;
   color: white;
+  /* position: fixed; */
+  overflow: hidden;
 }
 
 * {
@@ -37,7 +39,8 @@ form div {
 }
 
 textarea:focus,
-input:focus {
+input:focus,
+button:focus {
   outline: none;
 }
 
@@ -183,7 +186,18 @@ input:focus {
   margin-left: 15%;
   margin-right: 15%;
   border: none;
+}
+
+.up {
   background-color: #52ad52;
+}
+
+.down {
+  background-color: #a70000;
+}
+
+.neutral {
+  background-color: #9e9e9e;
 }
 
 #stock-header div {
@@ -366,4 +380,92 @@ input:focus {
 
 #buystock button:hover {
   opacity: 0.6;
+}
+
+/* transaction */
+/* #transaction {
+  position: relative;
+} */
+#transaction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-bottom: 10px;
+  background-color: black;
+}
+
+#transaction > h1 {
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  font-size: 48px;
+  margin: 25px;
+}
+
+#transaction #header {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 10px 15px;
+  border-bottom: 1px solid gray;
+  padding: 5px 0px;
+  padding-bottom: 15px;
+}
+
+#transaction #header div {
+  color: gray;
+  font-size: 20px;
+}
+
+#trans-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  height: 60vh;
+  width: 100%;
+}
+
+#single {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 10px 15px;
+  border-bottom: 1px solid gray;
+  padding: 5px 0px;
+  padding-bottom: 15px;
+}
+
+#transaction .long {
+  width: 140px;
+}
+
+#transaction .longx {
+  width: 200px;
+}
+
+#transaction .short {
+  width: 60px;
+}
+
+#trans-container .short {
+  text-transform: uppercase;
+}
+
+#trans-container #buy {
+  color: green;
+}
+
+#trans-container #sell {
+  color: red;
+}
+
+#transaction .shortx {
+  width: 80px;
+}
+
+#transaction .med {
+  width: 90px;
 }
