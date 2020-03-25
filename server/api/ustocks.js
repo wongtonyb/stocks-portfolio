@@ -13,7 +13,8 @@ router.get('/:id', async (req, res, next) => {
         qty: {
           [Op.gt]: 0
         }
-      }
+      },
+      order: [['id', 'ASC']]
     })
     res.json(portfolio)
   } catch (err) {
