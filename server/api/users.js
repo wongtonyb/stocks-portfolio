@@ -22,6 +22,7 @@ router.post('/cash', async (req, res, next) => {
     const user = await User.update(
       {
         cash: req.body.cash
+        //total cash updated on front end
       },
       {
         where: {

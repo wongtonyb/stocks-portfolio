@@ -6,7 +6,8 @@ import {
   // getUstockByIdSymbol,
   createTrans,
   updateQty,
-  updateOrCreateUstock
+  updateOrCreateUstock,
+  updateCash
 } from '../store'
 import {StockHeader} from './sub/stockheader'
 import {BuyStock} from './sub/buystock'
@@ -80,6 +81,7 @@ export const UserHome = props => {
             createTrans={props.createTrans}
             // ustockQty={props.ustockQty}
             updateOrCreateUstock={props.updateOrCreateUstock}
+            updateCash={props.updateCash}
           />
         </div>
       )}
@@ -123,6 +125,7 @@ const mapDispatch = dispatch => {
     createTrans: stock => dispatch(createTrans(stock)),
     updateQty: ustock => dispatch(updateQty(ustock)),
     updateOrCreateUstock: ustock => dispatch(updateOrCreateUstock(ustock)),
+    updateCash: userObj => dispatch(updateCash(userObj)),
     handleSubmit(evt) {
       evt.preventDefault()
       dispatch(getStock(evt.target.symbol.value))

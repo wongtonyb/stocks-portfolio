@@ -49,6 +49,11 @@ export class BuyStock extends React.Component {
       qty: Number(this.state.shares),
       userId: this.props.userId
     }
+    //object to update user cash
+    let user = {
+      userId: this.props.userId,
+      cash: Number(this.props.cash) - Number(this.state.total)
+    }
     // balance > total && total is numb !isNaN(n) &&  shares has no .
     if (tstock.total > Number(this.props.cash)) {
       this.setState({
@@ -68,7 +73,11 @@ export class BuyStock extends React.Component {
       // updateqty - ustock
       this.props.updateOrCreateUstock(ustock)
       //updateCash
+      this.props.updateCash(user)
+      //update local state, reset iput, update notice
       this.setState({
+        shares: '',
+        total: 0,
         error: 'Transaction Completed'
       })
     }
@@ -84,6 +93,7 @@ export class BuyStock extends React.Component {
     return (
       <form id="buystock">
         <h1>Buy {symbol}</h1>
+        {console.log(cash)}
         <h5>${cash} Available</h5>
         <div id="line">
           <h2>Number of Shares</h2>

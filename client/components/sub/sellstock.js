@@ -60,7 +60,7 @@ export const SellStock = props => {
       props.updateQty(ustock)
       // updateCash
       props.updateCash(user)
-      //refresh user, ustocks qty, transactions.
+      //refresh user, ustocks qty, transactions. ignored
       setError('Transaction Completed')
       setInput('')
       // props.refresh(symbol, shares - Number(input))

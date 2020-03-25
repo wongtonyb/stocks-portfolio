@@ -64,9 +64,9 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const updateCash = user => async dispatch => {
+export const updateCash = userObj => async dispatch => {
   try {
-    const res = await axios.post('/api/users/cash', user)
+    const res = await axios.post('/api/users/cash', userObj)
     console.log(res)
     dispatch(updatedCash(res.data))
   } catch (err) {
