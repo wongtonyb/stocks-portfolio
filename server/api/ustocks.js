@@ -4,7 +4,7 @@ const {Ustocks, User} = require('../db/models')
 module.exports = router
 
 //get
-//buy :id
+//by user :id
 router.get('/:id', async (req, res, next) => {
   try {
     const portfolio = await Ustocks.findAll({
@@ -21,8 +21,23 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+//by userId stocksymbol
+router.get('/:id/:symbol', async (req, res, next) => {
+  try {
+    const ustock = await Ustocks.findOne({
+      where: {
+        userId: req.params.id,
+        symbol: req.params.symbol
+      }
+    })
+    res.json(ustock)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //post
-//edit qty
+//edit qty on sell
 router.post('/sell', async (req, res, next) => {
   try {
     const ustock = await Ustocks.update(
@@ -39,6 +54,26 @@ router.post('/sell', async (req, res, next) => {
     )
     const userid = req.body.userId
     res.json(userid)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//edit qty on buy
+router.post('/buy', async (req, res, next) => {
+  try {
+    const ustock = await Ustocks.findOrCreate({
+      where: {
+        userId: req.body.userId,
+        companyName: req.body.companyName,
+        symbol: req.body.symbol
+      }
+    })
+
+    const rv = await ustock[0].update({
+      qty: ustock[0].qty + req.body.qty
+    })
+    res.json(rv)
   } catch (err) {
     next(err)
   }

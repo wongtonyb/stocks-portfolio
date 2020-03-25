@@ -40,8 +40,8 @@ export const SellStock = props => {
     let ustock = {
       symbol: symbol,
       companyName: companyName,
-      userId: userId,
-      qty: shares - Number(input)
+      qty: shares - Number(input),
+      userId: userId
     }
     //update user cash
     let user = {

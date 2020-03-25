@@ -1,7 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {getStock, createTrans} from '../store'
+import {
+  getStock,
+  // getUstockByIdSymbol,
+  createTrans,
+  updateQty,
+  updateOrCreateUstock
+} from '../store'
 import {StockHeader} from './sub/stockheader'
 import {BuyStock} from './sub/buystock'
 // import {BuyStock} from './buystock'
@@ -31,11 +37,10 @@ export const UserHome = props => {
 
   let color = change > 0 ? 'up' : change < 0 ? 'down' : 'neutral'
 
-  console.log('user-home', props)
   return (
     <div id="user-home">
       {/* <h2>SEARCH STOCKS</h2> */}
-      <form onSubmit={handleSubmit}>
+      <form name={userId} onSubmit={handleSubmit}>
         <input
           name="symbol"
           type="text"
@@ -73,6 +78,8 @@ export const UserHome = props => {
             current={current}
             userId={userId}
             createTrans={props.createTrans}
+            // ustockQty={props.ustockQty}
+            updateOrCreateUstock={props.updateOrCreateUstock}
           />
         </div>
       )}
@@ -88,6 +95,9 @@ const mapState = state => {
     userId: state.user.id,
     name: state.user.name,
     cash: state.user.cash,
+    // ustockQty: state.portfolio.ustockIdSymbol
+    //   ? state.portfolio.ustockIdSymbol.qty
+    //   : 0,
     symbol: state.buy.symbol,
     companyName: state.buy.companyName,
     //market closed - use previousClose
@@ -111,9 +121,12 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     createTrans: stock => dispatch(createTrans(stock)),
+    updateQty: ustock => dispatch(updateQty(ustock)),
+    updateOrCreateUstock: ustock => dispatch(updateOrCreateUstock(ustock)),
     handleSubmit(evt) {
       evt.preventDefault()
       dispatch(getStock(evt.target.symbol.value))
+      // dispatch(getUstockByIdSymbol(evt.target.name, evt.target.symbol.value))
     }
   }
 }

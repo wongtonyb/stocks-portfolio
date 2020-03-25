@@ -9,11 +9,9 @@ const iexToken = 'pk_177c4d499fd54f218f09cdf365ac8a12'
 
 //action types
 const GET_STOCK = 'GET_STOCK'
-const BUY_STOCK = 'BUY_STOCK'
 
 //action creators
 const gotStock = stock => ({type: GET_STOCK, stock})
-const broughtStock = stock => ({type: BUY_STOCK, stock})
 
 //thunk creators
 export const getStock = symbol => async dispatch => {
@@ -29,20 +27,6 @@ export const getStock = symbol => async dispatch => {
   }
 }
 
-export const buyTrans = stock => async dispatch => {
-  try {
-    const res = await axios.post('/api/transaction/buy', stock)
-    dispatch(broughtStock(res.data))
-  } catch (err) {
-    console.error(err)
-    return dispatch(broughtStock({error: err}))
-  }
-}
-
-// export const buyStock = stock => dispatch => {
-//   dispatch(broughtStock({error: true}))
-// }
-
 //initial state
 const initialState = {error: false}
 
@@ -51,8 +35,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_STOCK:
       return action.stock
-    case BUY_STOCK:
-      return action.stock
+
     default:
       return state
   }

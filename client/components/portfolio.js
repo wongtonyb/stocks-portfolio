@@ -53,6 +53,7 @@ export class Portfolio extends Component {
 
   // eslint-disable-next-line complexity
   render() {
+    console.log('stock value', this.props.stockvalue)
     let net = this.props.stockvalue
       ? (
           Number(this.props.user.cash) +
@@ -72,8 +73,8 @@ export class Portfolio extends Component {
             Transaction Completed
           </h3>
         )}
-        <div id="main">
-          <div id="left">
+        <div id="main-p">
+          <div id="left-p">
             {this.props.portfolio.length &&
               Object.keys(this.props.iex).length &&
               this.props.portfolio.map(s => (
@@ -87,7 +88,7 @@ export class Portfolio extends Component {
           </div>
           {this.state.stock && this.state.iex && <div id="border" />}
           {this.state.stock && this.state.iex && (
-            <div id="right">
+            <div id="right-p">
               <Sell
                 ustock={this.state.stock}
                 iex={this.state.iex}

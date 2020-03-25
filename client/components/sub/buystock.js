@@ -46,6 +46,7 @@ export class BuyStock extends React.Component {
     let ustock = {
       symbol: this.props.symbol,
       companyName: this.props.companyName,
+      qty: Number(this.state.shares),
       userId: this.props.userId
     }
     // balance > total && total is numb !isNaN(n) &&  shares has no .
@@ -64,7 +65,8 @@ export class BuyStock extends React.Component {
     } else {
       // buyStock(tstock) - transaction
       this.props.createTrans(tstock)
-      // updateqty
+      // updateqty - ustock
+      this.props.updateOrCreateUstock(ustock)
       //updateCash
       this.setState({
         error: 'Transaction Completed'
