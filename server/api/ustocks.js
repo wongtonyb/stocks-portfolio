@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Op} = require('Sequelize')
-const {Ustocks} = require('../db/models')
+const {Ustocks, User} = require('../db/models')
 module.exports = router
 
 //get
@@ -16,6 +16,29 @@ router.get('/:id', async (req, res, next) => {
       }
     })
     res.json(portfolio)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//post
+//edit qty
+router.post('/sell', async (req, res, next) => {
+  try {
+    const ustock = await Ustocks.update(
+      {
+        qty: req.body.qty
+      },
+      {
+        where: {
+          symbol: req.body.symbol,
+          companyName: req.body.companyName,
+          userId: req.body.userId
+        }
+      }
+    )
+    console.log('ustock', ustock)
+    res.json(ustock)
   } catch (err) {
     next(err)
   }

@@ -41,7 +41,7 @@ const User = db.define('user', {
   },
   cash: {
     type: Sequelize.DECIMAL(10, 2),
-    allowNull: false
+    defaultValue: 5000.0
   }
   // googleId: {
   //   type: Sequelize.STRING

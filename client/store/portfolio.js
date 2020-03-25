@@ -10,10 +10,14 @@ const iexToken = 'pk_177c4d499fd54f218f09cdf365ac8a12'
 //action types
 const GET_PORT = 'GET_PORT'
 const GET_IEX = 'GET_IEX'
+const UPDATE_QTY = 'UPDATE_QTY'
+const UPDATE_CASH = 'UPDATE_CASH'
 
 //action creators
 const gotPort = port => ({type: GET_PORT, port})
 const gotIex = iex => ({type: GET_IEX, iex})
+const updatedQty = ustock => ({type: UPDATE_QTY, ustock})
+const updatedCash = user => ({type: UPDATE_CASH, user})
 
 //thunk creators
 export const getPort = userid => async dispatch => {
@@ -34,11 +38,24 @@ export const getPort = userid => async dispatch => {
   }
 }
 
-// export const getIex = symbol => async dispatch => {
-//   try {
+export const updateQty = ustock => async dispatch => {
+  try {
+    console.log('hit update qty thunk')
+    const res = await axios.post('/api/ustocks/sell', ustock)
+    dispatch(updatedQty(res.data))
+  } catch (err) {
+    return dispatch(updatedQty({error: err}))
+  }
+}
 
-//   } catch (error)
-// }
+export const updateCash = user => async dispatch => {
+  try {
+    const res = await axios.post('/api/users/cash', user)
+    dispatch(updatedCash(res.data))
+  } catch (err) {
+    dispatch(updatedCash({error: err}))
+  }
+}
 
 //initial state
 const initialState = {port: [], iex: []}

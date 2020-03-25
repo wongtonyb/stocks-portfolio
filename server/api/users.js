@@ -15,3 +15,22 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+//update cash
+router.post('/cash', async (req, res, next) => {
+  try {
+    const user = await User.update(
+      {
+        cash: req.body.cash
+      },
+      {
+        where: {
+          id: req.body.userId
+        }
+      }
+    )
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -12,7 +12,7 @@ const Ustocks = db.define('ustocks', {
   },
   qty: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    defaultValue: 0
   }
 })
 

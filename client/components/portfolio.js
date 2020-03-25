@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getPort} from '../store/portfolio'
+import {getPort, updateQty, updateCash} from '../store/portfolio'
+import {sellStock} from '../store/sell'
 import {StockHeaderPort} from './sub/stockheaderport'
 import {Sell} from './sub/sell'
 
@@ -60,6 +61,9 @@ export class Portfolio extends Component {
                 ustock={this.state.stock}
                 iex={this.state.iex}
                 user={this.props.user}
+                sellStock={this.props.sellStock}
+                updateQty={this.props.updateQty}
+                updateCash={this.props.updateCash}
               />
             </div>
           )}
@@ -92,7 +96,10 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getPort: userid => dispatch(getPort(userid))
+    getPort: userid => dispatch(getPort(userid)),
+    sellStock: stock => dispatch(sellStock(stock)),
+    updateQty: stock => dispatch(updateQty(stock)),
+    updateCash: user => dispatch(updateCash(user))
   }
 }
 

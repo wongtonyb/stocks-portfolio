@@ -4,9 +4,7 @@ import {StatsInfo} from './statsinfo'
 import {SellStock} from './sellstock'
 
 export const Sell = props => {
-  const {ustock, iex, user} = props
-
-  console.log(iex)
+  const {ustock, iex, user, sellStock} = props
 
   let color = iex.change > 0 ? 'up' : iex.change < 0 ? 'down' : 'neutral'
 
@@ -46,6 +44,9 @@ export const Sell = props => {
         current={current}
         userId={user.id}
         shares={ustock.qty}
+        sellStock={props.sellStock}
+        updateQty={props.updateQty}
+        updateCash={props.updateCash}
       />
     </div>
   )

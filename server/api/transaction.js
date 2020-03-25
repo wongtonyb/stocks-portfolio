@@ -40,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 //add transaction
-router.post('/', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
     const transaction = await Transaction.create(req.body)
     res.json(transaction)

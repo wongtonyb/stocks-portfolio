@@ -17,9 +17,9 @@ const soldStock = stock => ({type: SELL_STOCK, stock})
 
 export const sellStock = stock => async dispatch => {
   try {
-    // const res = await axios.post('/api/transaction', stock)
-    // dispatch(broughtStock(res.data))
-    dispatch(console.log('redux hit'))
+    console.log('hit redux transaction thunk')
+    const res = await axios.put('/api/transaction', stock)
+    dispatch(soldStock(res.data))
   } catch (err) {
     console.error(err)
     return dispatch(soldStock({error: err}))
