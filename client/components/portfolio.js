@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getPort, updateQty, updateCash} from '../store/portfolio'
-import {sellStock} from '../store/sell'
+import {getPort, updateQty} from '../store/portfolio'
+import {updateCash} from '../store/user'
+// import {getUser} from '../store/user'
+import {createTrans} from '../store/transaction'
 import {StockHeaderPort} from './sub/stockheaderport'
 import {Sell} from './sub/sell'
 
@@ -10,9 +12,11 @@ export class Portfolio extends Component {
     super()
     this.state = {
       stock: false,
-      iex: false
+      iex: false,
+      sold: false
     }
     this.showMore = this.showMore.bind(this)
+    this.refresh = this.refresh.bind(this)
   }
 
   componentDidMount() {
@@ -26,6 +30,28 @@ export class Portfolio extends Component {
     })
   }
 
+  refresh(symbol, sharesleft) {
+    if (sharesleft === 0) {
+      this.setState({
+        stock: false,
+        iex: false,
+        sold: true
+      })
+    } else {
+      console.log(symbol, this.props.portfolio, this.props.iex)
+      let stock, iex
+      this.props.portfolio.forEach(s => {
+        if (s.symbol === symbol) stock = s
+      })
+      iex = this.props.iex[symbol].quote
+      this.setState({
+        stock: stock,
+        iex: iex
+      })
+    }
+  }
+
+  // eslint-disable-next-line complexity
   render() {
     let net = this.props.stockvalue
       ? (
@@ -41,6 +67,11 @@ export class Portfolio extends Component {
     return (
       <div id="portfolio">
         <h1>Portfolio (${numberWithCommas(net)})</h1>
+        {this.state.sold && (
+          <h3 id="sold" className="success">
+            Transaction Completed
+          </h3>
+        )}
         <div id="main">
           <div id="left">
             {this.props.portfolio.length &&
@@ -61,9 +92,10 @@ export class Portfolio extends Component {
                 ustock={this.state.stock}
                 iex={this.state.iex}
                 user={this.props.user}
-                sellStock={this.props.sellStock}
+                createTrans={this.props.createTrans}
                 updateQty={this.props.updateQty}
                 updateCash={this.props.updateCash}
+                refresh={this.refresh}
               />
             </div>
           )}
@@ -97,7 +129,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getPort: userid => dispatch(getPort(userid)),
-    sellStock: stock => dispatch(sellStock(stock)),
+    createTrans: stock => dispatch(createTrans(stock)),
     updateQty: stock => dispatch(updateQty(stock)),
     updateCash: user => dispatch(updateCash(user))
   }

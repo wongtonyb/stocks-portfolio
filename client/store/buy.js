@@ -29,9 +29,9 @@ export const getStock = symbol => async dispatch => {
   }
 }
 
-export const buyStock = stock => async dispatch => {
+export const buyTrans = stock => async dispatch => {
   try {
-    const res = await axios.post('/api/transaction', stock)
+    const res = await axios.post('/api/transaction/buy', stock)
     dispatch(broughtStock(res.data))
   } catch (err) {
     console.error(err)

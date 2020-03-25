@@ -483,10 +483,15 @@ button:focus {
 
 #portfolio > h1 {
   text-transform: capitalize;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   font-size: 48px;
-  margin: 25px;
+  margin: 15px;
   margin-top: 10px;
+}
+
+#portfolio #sold {
+  margin-bottom: 5px;
+  letter-spacing: 1px;
 }
 
 #portfolio #main {

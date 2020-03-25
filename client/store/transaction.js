@@ -2,11 +2,14 @@ import axios from 'axios'
 
 //action types
 const GET_TRANS = 'GET_TRANS'
+const SELL_STOCK = 'SELL_STOCK'
 
 //action creators
 const gotTrans = trans => ({type: GET_TRANS, trans})
+const soldStock = stock => ({type: SELL_STOCK, stock})
 
 //thunk creators
+//get all trans for user
 export const getTrans = id => async dispatch => {
   try {
     const res = await axios.get(`/api/transaction/${id}`)
@@ -16,11 +19,16 @@ export const getTrans = id => async dispatch => {
   }
 }
 
-// export const getAll = () => async dispatch => {
-//   const res = await axios.get(`/api/transaction/`)
-//   dispatch(getTrans(res.data))
-//   // console.log('after', res)
-// }
+//create new trans
+export const createTrans = stock => async dispatch => {
+  try {
+    const res = await axios.put('/api/transaction', stock)
+    dispatch(soldStock(res.data))
+  } catch (err) {
+    console.error(err)
+    return dispatch(soldStock({error: err}))
+  }
+}
 
 //initial state
 const initialState = []

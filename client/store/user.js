@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const UPDATE_CASH = 'UPDATE_CASH'
 
 /**
  * INITIAL STATE
@@ -17,6 +18,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const updatedCash = user => ({type: UPDATE_CASH, user})
 
 /**
  * THUNK CREATORS
@@ -62,6 +64,16 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const updateCash = user => async dispatch => {
+  try {
+    const res = await axios.post('/api/users/cash', user)
+    console.log(res)
+    dispatch(updatedCash(res.data))
+  } catch (err) {
+    dispatch(updatedCash({error: err}))
+  }
+}
+
 /**
  * REDUCER
  */
@@ -71,6 +83,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case UPDATE_CASH:
+      return action.user
     default:
       return state
   }

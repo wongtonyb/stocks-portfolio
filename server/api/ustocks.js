@@ -37,8 +37,8 @@ router.post('/sell', async (req, res, next) => {
         }
       }
     )
-    console.log('ustock', ustock)
-    res.json(ustock)
+    const userid = req.body.userId
+    res.json(userid)
   } catch (err) {
     next(err)
   }

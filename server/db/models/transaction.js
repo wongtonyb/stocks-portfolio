@@ -15,20 +15,21 @@ const Transaction = db.define('transaction', {
     allowNull: false
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2),
-    allowNull: false
+    type: Sequelize.DECIMAL(10, 2)
+    // allowNull: false
   },
   qty: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    defaultValue: 0
+    // allowNull: false
   },
   total: {
-    type: Sequelize.DECIMAL(10, 2),
-    allowNull: false
+    type: Sequelize.DECIMAL(10, 2)
+    // allowNull: false
   },
   date: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
+    // allowNull: false
   }
 })
 

@@ -21,6 +21,7 @@ module.exports = router
 //   }
 // })
 
+//GET
 //by id
 router.get('/:id', async (req, res, next) => {
   try {
@@ -39,6 +40,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+//PUT
 //add transaction
 router.put('/', async (req, res, next) => {
   try {

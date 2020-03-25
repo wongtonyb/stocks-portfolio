@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {getStock} from '../store'
+import {getStock, createTrans} from '../store'
 import {StockHeader} from './sub/stockheader'
 import {BuyStock} from './sub/buystock'
 // import {BuyStock} from './buystock'
@@ -72,6 +72,7 @@ export const UserHome = props => {
             cash={cash}
             current={current}
             userId={userId}
+            createTrans={props.createTrans}
           />
         </div>
       )}
@@ -109,7 +110,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getstock: s => dispatch(getStock(s)),
+    createTrans: stock => dispatch(createTrans(stock)),
     handleSubmit(evt) {
       evt.preventDefault()
       dispatch(getStock(evt.target.symbol.value))

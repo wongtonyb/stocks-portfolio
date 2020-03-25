@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 
 export const SellStock = props => {
-  console.log(props)
   //previous props
   const {symbol, companyName, cash, current, userId, shares} = props
 
@@ -44,7 +43,6 @@ export const SellStock = props => {
       userId: userId,
       qty: shares - Number(input)
     }
-    console.log(ustock, typeof ustock.qty)
     //update user cash
     let user = {
       userId: userId,
@@ -57,12 +55,16 @@ export const SellStock = props => {
       setError('Invalid Quantity')
     } else {
       // sellStock(tstock) - create transaction
-      props.sellStock(tstock)
+      props.createTrans(tstock)
       // updatePortfolio(ustock) - update shares in ustock
       props.updateQty(ustock)
       // updateCash
       props.updateCash(user)
+      //refresh user, ustocks qty, transactions.
       setError('Transaction Completed')
+      setInput('')
+      // props.refresh(symbol, shares - Number(input))
+      props.refresh(symbol, 0)
     }
   }
 

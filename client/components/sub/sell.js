@@ -44,9 +44,10 @@ export const Sell = props => {
         current={current}
         userId={user.id}
         shares={ustock.qty}
-        sellStock={props.sellStock}
+        createTrans={props.createTrans}
         updateQty={props.updateQty}
         updateCash={props.updateCash}
+        refresh={props.refresh}
       />
     </div>
   )

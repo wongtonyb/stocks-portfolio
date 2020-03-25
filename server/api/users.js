@@ -29,7 +29,12 @@ router.post('/cash', async (req, res, next) => {
         }
       }
     )
-    res.json(user)
+    const rv = await User.findOne({
+      where: {
+        id: req.body.userId
+      }
+    })
+    res.json(rv)
   } catch (err) {
     next(err)
   }

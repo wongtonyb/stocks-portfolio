@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {buyStock, getStock} from '../../store'
+import {buyTrans, getStock} from '../../store'
 
 export class BuyStock extends React.Component {
   constructor(props) {
@@ -62,9 +62,10 @@ export class BuyStock extends React.Component {
         error: 'Invalid Quantity'
       })
     } else {
-      this.props.buyStock(tstock)
-      // buyStock(tstock)
-      console.log(this.props.error)
+      // buyStock(tstock) - transaction
+      this.props.createTrans(tstock)
+      // updateqty
+      //updateCash
       this.setState({
         error: 'Transaction Completed'
       })
@@ -138,17 +139,3 @@ export class BuyStock extends React.Component {
     )
   }
 }
-
-const mapState = state => {
-  return {
-    error: state.buy.error || 'does not exist'
-  }
-}
-
-const mapDispatch = dispatch => {
-  return {
-    buyStock: stock => dispatch(buyStock(stock))
-  }
-}
-
-export default connect(mapState, mapDispatch)(BuyStock)
