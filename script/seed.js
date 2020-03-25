@@ -106,6 +106,36 @@ async function seed() {
       total: 1688.95,
       date: '2020-3-14 23:39:25',
       userId: 1
+    }),
+    Transaction.create({
+      symbol: 'TWTR',
+      companyName: 'Twitter, Inc.',
+      type: 'sell',
+      price: 26.23,
+      qty: 5,
+      total: 131.15,
+      date: '2020-3-15 18:39:25',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'SNAP',
+      companyName: 'Snap, Inc.',
+      type: 'sell',
+      price: 11.23,
+      qty: 4,
+      total: 44.92,
+      date: '2020-3-15 22:49:13',
+      userId: 1
+    }),
+    Transaction.create({
+      symbol: 'MSFT',
+      companyName: 'Microsoft Corp.',
+      type: 'buy',
+      price: 147.75,
+      qty: 5,
+      total: 738.75,
+      date: '2020-3-19 19:19:25',
+      userId: 1
     })
   ])
 
@@ -125,13 +155,13 @@ async function seed() {
     Ustocks.create({
       symbol: 'SNAP',
       companyName: 'Snap, Inc.',
-      qty: 21,
+      qty: 17,
       userId: 1
     }),
     Ustocks.create({
       symbol: 'TWTR',
       companyName: 'Twitter, Inc.',
-      qty: 11,
+      qty: 6,
       userId: 1
     }),
     Ustocks.create({
@@ -143,6 +173,12 @@ async function seed() {
     Ustocks.create({
       symbol: 'NFLX',
       companyName: 'Netflix, Inc.',
+      qty: 5,
+      userId: 1
+    }),
+    Ustocks.create({
+      symbol: 'MSFT',
+      companyName: 'Microsoft Corp.',
       qty: 5,
       userId: 1
     })
