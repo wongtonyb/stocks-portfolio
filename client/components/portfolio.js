@@ -76,10 +76,9 @@ export class Portfolio extends Component {
           </h3>
         )}
         <div id="main-p">
-          <div id="left-p">
-            {this.props.portfolio.length &&
-              Object.keys(this.props.iex).length &&
-              this.props.portfolio.map(s => (
+          {this.props.portfolio.length && Object.keys(this.props.iex).length ? (
+            <div id="left-p">
+              {this.props.portfolio.map(s => (
                 <StockHeaderPort
                   key={s.id}
                   stock={s}
@@ -87,7 +86,11 @@ export class Portfolio extends Component {
                   showMore={this.showMore}
                 />
               ))}
-          </div>
+            </div>
+          ) : (
+            <div />
+          )}
+
           {this.state.stock && this.state.iex && <div id="border" />}
           {this.state.stock &&
             this.state.iex && (
