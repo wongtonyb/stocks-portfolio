@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 //hide in production
-const iexTestToken = 'Tpk_3a0c10e1680f4a7b9560dc8bd7290081'
+// const iexTestToken = 'Tpk_3a0c10e1680f4a7b9560dc8bd7290081'
 const iexToken = 'pk_177c4d499fd54f218f09cdf365ac8a12'
 
-// const iexTestToken = process.env.IEX_TEST_TOKEN
-// const iexToken = process.env.IEX_TEST_TOKEN
+const iexTestToken = process.env.IEX_TEST_TOKEN
+// const iexToken = process.env.IEX_TOKEN
 
 //action types
 const GET_PORT = 'GET_PORT'
