@@ -4,11 +4,12 @@ Mock Stocks Portfolio Web Application
 
 ## :gear:: Functionality
 
-* Login and signup Authentication
+* Login and signup authentication
 * Users can look up stocks by ticker symbol
 * Users can buy and sell stocks
-* Users can view portfolio of stocks owned
-* Users can view all past transactions
+* Users can view portfolio of stocks and their current values
+* Users can view all trades made to date
+* Color of stocks will change based on daily performance
 
 ## :hammer_and_pick: Built With
 
