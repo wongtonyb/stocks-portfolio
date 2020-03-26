@@ -10,22 +10,16 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 1em;
+  width: 0.4em;
 }
 
 body::-webkit-scrollbar-track {
-}
-
-body::-webkit-scrollbar-buton {
-}
-
-body::-webkit-scrollbar-track-piece {
+  background-color: #121111;
 }
 
 body::-webkit-scrollbar-thumb {
-}
-
-body::-webkit-scrollbar-corner {
+  background-color: black;
+  border-radius: 1em;
 }
 
 #main {
