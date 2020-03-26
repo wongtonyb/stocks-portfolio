@@ -26,7 +26,7 @@ Back End
 * Heroku - cloud deployment
 * Travis CI - continuous integration
 
-## :writing_hand: Authors
+## :writing_hand: Developer
 
 * Tony Wong - [wongtonyb](https://github.com/wongtonyb)
 
