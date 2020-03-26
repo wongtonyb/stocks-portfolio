@@ -38,7 +38,6 @@ export class Portfolio extends Component {
         sold: true
       })
     } else {
-      console.log(symbol, this.props.portfolio, this.props.iex)
       let stock, iex
       this.props.portfolio.forEach(s => {
         if (s.symbol === symbol) stock = s
@@ -53,7 +52,6 @@ export class Portfolio extends Component {
 
   // eslint-disable-next-line complexity
   render() {
-    console.log('stock value', this.props.stockvalue)
     let net = this.props.stockvalue
       ? (
           Number(this.props.user.cash) +

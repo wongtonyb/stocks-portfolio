@@ -10,10 +10,6 @@ export class BuyStock extends React.Component {
     this.handleBuy = this.handleBuy.bind(this)
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   handleChange(e) {
     let sum = (this.props.current * e.target.value).toFixed(2)
     this.setState({
@@ -41,7 +37,6 @@ export class BuyStock extends React.Component {
       date: dateTime,
       userId: this.props.userId
     }
-    console.log(tstock)
     //stock for portfolio
     let ustock = {
       symbol: this.props.symbol,
@@ -93,7 +88,6 @@ export class BuyStock extends React.Component {
     return (
       <form id="buystock">
         <h1>Buy {symbol}</h1>
-        {console.log(cash)}
         <h5>${cash} Available</h5>
         <div id="line">
           <h2>Number of Shares</h2>
@@ -121,8 +115,8 @@ export class BuyStock extends React.Component {
             {isNaN(this.state.total)
               ? 'Enter a numeric value'
               : this.state.shares.includes('.')
-              ? 'Enter a whole quantity'
-              : `$${numberWithCommas(this.state.total)}`}
+                ? 'Enter a whole quantity'
+                : `$${numberWithCommas(this.state.total)}`}
           </h3>
         </div>
         <div id="btn-line">
@@ -141,7 +135,7 @@ export class BuyStock extends React.Component {
               {this.state.error}
             </div>
           ) : (
-            <div id="buy-notice"></div>
+            <div id="buy-notice" />
           )}
           <button type="button" onClick={this.handleBuy}>
             BUY

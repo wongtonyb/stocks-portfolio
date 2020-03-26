@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import {logout, resetPort} from '../store'
 
 const Home = ({handleClick, isLoggedIn}) => (
   <div id="home">
@@ -42,6 +42,7 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+      dispatch(resetPort())
     }
   }
 }

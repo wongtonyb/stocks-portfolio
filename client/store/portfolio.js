@@ -13,6 +13,7 @@ const GET_IEX = 'GET_IEX'
 const UPDATE_QTY = 'UPDATE_QTY'
 const USTOCK_ID_SYMBOL = 'USTOCK_ID_SYMBOL'
 const UPDATE_OR_CREATE = 'UPDATE_OR_CREATE'
+const RESET_PORT = 'RESET_PORT'
 
 //action creators
 const gotPort = port => ({type: GET_PORT, port})
@@ -20,6 +21,7 @@ const gotIex = iex => ({type: GET_IEX, iex})
 const updatedQty = ustock => ({type: UPDATE_QTY, ustock})
 const ustockIdSymbol = ustock => ({type: USTOCK_ID_SYMBOL, ustock})
 const updateOrCreate = ustock => ({type: UPDATE_OR_CREATE, ustock})
+const zeroPort = () => ({type: RESET_PORT})
 
 //thunk creators
 //get portfolio and corresponding iex by userId
@@ -72,8 +74,24 @@ export const updateOrCreateUstock = ustock => async dispatch => {
   }
 }
 
+//reset port
+export const resetPort = () => dispatch => {
+  try {
+    dispatch(zeroPort())
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 //initial state
-const initialState = {port: [], iex: [], ustockIdSymbol: {}}
+const defaultPort = []
+const defaultIex = []
+const defaultUstockIdSymbol = {}
+const initialState = {
+  port: defaultPort,
+  iex: defaultIex,
+  ustockIdSymbol: defaultUstockIdSymbol
+}
 
 //reducer
 export default function(state = initialState, action) {
@@ -84,6 +102,12 @@ export default function(state = initialState, action) {
       return {...state, iex: action.iex}
     case USTOCK_ID_SYMBOL:
       return {...state, ustockIdSymbol: action.ustock}
+    case RESET_PORT:
+      return {
+        port: defaultPort,
+        iex: defaultIex,
+        ustockIdSymbol: defaultUstockIdSymbol
+      }
     default:
       return state
   }
