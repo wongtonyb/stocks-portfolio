@@ -67,7 +67,9 @@ export class Portfolio extends Component {
 
     return (
       <div id="portfolio">
-        <h1>Portfolio (${numberWithCommas(net)})</h1>
+        <h1>
+          {this.props.user.name}'s Portfolio (${numberWithCommas(net)})
+        </h1>
         {this.state.sold && (
           <h3 id="sold" className="success">
             Transaction Completed
@@ -87,19 +89,20 @@ export class Portfolio extends Component {
               ))}
           </div>
           {this.state.stock && this.state.iex && <div id="border" />}
-          {this.state.stock && this.state.iex && (
-            <div id="right-p">
-              <Sell
-                ustock={this.state.stock}
-                iex={this.state.iex}
-                user={this.props.user}
-                createTrans={this.props.createTrans}
-                updateQty={this.props.updateQty}
-                updateCash={this.props.updateCash}
-                refresh={this.refresh}
-              />
-            </div>
-          )}
+          {this.state.stock &&
+            this.state.iex && (
+              <div id="right-p">
+                <Sell
+                  ustock={this.state.stock}
+                  iex={this.state.iex}
+                  user={this.props.user}
+                  createTrans={this.props.createTrans}
+                  updateQty={this.props.updateQty}
+                  updateCash={this.props.updateCash}
+                  refresh={this.refresh}
+                />
+              </div>
+            )}
         </div>
       </div>
     )

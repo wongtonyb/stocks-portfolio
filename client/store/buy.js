@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 //hide in production
-const iexTestToken = 'Tpk_3a0c10e1680f4a7b9560dc8bd7290081'
+// const iexTestToken = 'Tpk_3a0c10e1680f4a7b9560dc8bd7290081'
+const iexToken = 'pk_177c4d499fd54f218f09cdf365ac8a12'
 
 // const iexTestToken = process.env.IEX_TEST_TOKEN
 // const iexToken = process.env.IEX_TOKEN
@@ -16,7 +17,8 @@ const gotStock = stock => ({type: GET_STOCK, stock})
 export const getStock = symbol => async dispatch => {
   try {
     const res = await axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${iexTestToken}`
+      // `https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${iexTestToken}`
+      `https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${iexToken}`
     )
     res.error = false
     dispatch(gotStock(res.data))
