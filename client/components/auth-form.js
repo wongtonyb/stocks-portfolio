@@ -25,6 +25,10 @@ const AuthForm = props => {
         <button type="submit">{displayName}</button>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
+      <div>Create own account or use following</div>
+      <div>Email: test@email.com</div>
+      <div>Password: test</div>
+
       {/* <a href="/auth/google">{displayName} with Google</a> */}
     </div>
   )
